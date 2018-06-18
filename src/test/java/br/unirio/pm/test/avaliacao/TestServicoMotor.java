@@ -12,7 +12,7 @@ import static org.junit.Assert.assertNull;
 
 public class TestServicoMotor {
 
-    static ServicoMotores servicoMotores;
+    private static ServicoMotores servicoMotores;
 
     @BeforeClass
     public static void inicializar() {
