@@ -1,20 +1,22 @@
 package br.unirio.pm.test.avaliacao;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import br.uniriotec.pm20181.controle.Simulador;
+import br.uniriotec.pm20181.modelo.ambiente.Ambiente;
+import br.uniriotec.pm20181.modelo.ambiente.FabricaAmbientes;
+import br.uniriotec.pm20181.modelo.foguete.Foguete;
+import br.uniriotec.pm20181.modelo.foguete.Motor;
+import br.uniriotec.pm20181.modelo.plano.PlanoVoo;
+import br.uniriotec.pm20181.servico.CarregadorFoguete;
+import br.uniriotec.pm20181.servico.CarregadorPlanoVoo;
+import br.uniriotec.pm20181.servico.ServicoMotores;
 import org.junit.Test;
 
-import br.unirio.pm.controle.Simulador;
-import br.unirio.pm.modelo.ambiente.Ambiente;
-import br.unirio.pm.modelo.ambiente.FabricaAmbientes;
-import br.unirio.pm.modelo.foguete.Foguete;
-import br.unirio.pm.modelo.motor.Motor;
-import br.unirio.pm.modelo.plano.PlanoVoo;
-import br.unirio.pm.servico.CarregadorFoguete;
-import br.unirio.pm.servico.CarregadorPlanoVoo;
-import br.unirio.pm.servico.ServicoMotores;
+
 
 /**
  * Caso de teste que testa um foguete simples com motor de impulso linear
@@ -31,8 +33,8 @@ public class TestMotorImpulsoLinear
 		when(servicoMotoresSpy.pegaMotor("Ellis", "L600"))
 			.thenReturn(criaMotorImpulsoLinear());
 
-		when(servicoMotoresSpy.carregaImpulso(anyObject()))
-			.thenReturn(true);
+		when(servicoMotoresSpy.carregaImpulso(any()))
+				.thenReturn(true);
 
 		Foguete foguete = new CarregadorFoguete().carrega("data/avaliacao/foguete-01-descricao.xml", servicoMotoresSpy);
 		PlanoVoo plano = new CarregadorPlanoVoo().carrega("data/avaliacao/foguete-01-plano-01.xml", foguete);
