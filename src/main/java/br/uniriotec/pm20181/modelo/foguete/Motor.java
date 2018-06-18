@@ -18,7 +18,7 @@ public class Motor extends Componente {
 
     @Override
     double getMassa() {
-        return peso + pesoCombustivel;
+        return super.getMassa() + pesoCombustivel;
     }
 
     @Override

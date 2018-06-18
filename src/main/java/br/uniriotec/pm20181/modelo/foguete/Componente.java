@@ -49,7 +49,23 @@ public abstract class Componente {
         return null;
     }
 
-    abstract double getMassa();
+    double getMassa() {
+        double pesoTotal = this.peso;
+
+        //Se não tenho componentes anexados ao componente, retorne o peso do próprio
+        if (componentes.isEmpty()) {
+            return pesoTotal;
+        }
+
+        List<Componente> componentesConectados = new ArrayList<>();
+        componentes.forEach((direcao, componente) -> componentesConectados.add(componente));
+
+        for (Componente componente : componentesConectados) {
+            pesoTotal = pesoTotal + componente.getMassa();
+        }
+
+        return pesoTotal;
+    }
 
     double getArea() {
         double areaRedor = AreaUtil.areaCirculo(this.diametro);

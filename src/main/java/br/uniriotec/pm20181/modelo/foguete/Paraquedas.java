@@ -14,11 +14,6 @@ public class Paraquedas extends Componente {
     @Getter @Setter private double cd;
 
     @Override
-    double getMassa() {
-        return this.peso;
-    }
-
-    @Override
     protected Componente clone() {
         return null;
     }

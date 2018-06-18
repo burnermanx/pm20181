@@ -16,7 +16,7 @@ public class Carga extends Componente {
 
     @Override
     double getMassa() {
-        return this.peso + this.pesoCarga;
+        return super.getMassa() + pesoCarga;
     }
 
     @Override
