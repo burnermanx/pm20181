@@ -3,16 +3,24 @@ package br.uniriotec.pm20181.servico;
 import br.uniriotec.pm20181.modelo.foguete.Motor;
 import br.uniriotec.pm20181.modelo.webservice.SearchRequest;
 import br.uniriotec.pm20181.modelo.webservice.SearchResponse;
-import br.uniriotec.pm20181.modelo.webservice.SearchResult;
 import okhttp3.*;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class ServicoMotoresThrustCurve implements ServicoMotores {
 
     private static final String SERVICE_URL = "http://www.thrustcurve.org/servlets/search";
     private static final String MEDIA_XML = "text/xml;charset=ISO-8859-1";
 
-    private OkHttpClient httpClient = new OkHttpClient.Builder()
-            .build();
+    final private OkHttpClient httpClient;
+
+    public ServicoMotoresThrustCurve() {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(System.out::println);
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        httpClient = new OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build();
+    }
 
     @Override
     public Motor pegaMotor(String fabricante, String modelo) {
@@ -35,7 +43,7 @@ public class ServicoMotoresThrustCurve implements ServicoMotores {
 
             if (searchResponse != null && searchResponse.getResults() != null
                     && !searchResponse.getResults().isEmpty()) {
-                SearchResult result = searchResponse.getResults().get(0);
+                SearchResponse.SearchResult result = searchResponse.getResults().get(0);
 
                 Motor motor = new Motor();
                 motor.setPesoCombustivel(result.getPropWeight());
