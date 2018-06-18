@@ -1,11 +1,11 @@
-package br.uniriotec.pm20181.model;
+package br.uniriotec.pm20181.modelo.foguete;
 
 import lombok.Getter;
 import lombok.Setter;
 
-public class ComponenteCarga extends Componente {
+public class Carga extends Componente {
 
-    public ComponenteCarga() {
+    public Carga() {
         super(TiposComponente.COMPONENTE_CARGA);
     }
 

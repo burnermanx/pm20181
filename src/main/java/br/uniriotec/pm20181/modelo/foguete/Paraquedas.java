@@ -1,11 +1,11 @@
-package br.uniriotec.pm20181.model;
+package br.uniriotec.pm20181.modelo.foguete;
 
 import lombok.Getter;
 import lombok.Setter;
 
-public class ComponenteParaquedas extends Componente {
+public class Paraquedas extends Componente {
 
-    public ComponenteParaquedas() {
+    public Paraquedas() {
         super(TiposComponente.COMPONENTE_PARAQUEDAS);
     }
 

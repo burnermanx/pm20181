@@ -1,4 +1,4 @@
-package br.uniriotec.pm20181.model;
+package br.uniriotec.pm20181.modelo.foguete;
 
 import br.uniriotec.pm20181.util.AreaUtil;
 import lombok.Getter;

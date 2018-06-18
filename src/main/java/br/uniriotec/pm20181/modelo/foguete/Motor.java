@@ -1,16 +1,21 @@
-package br.uniriotec.pm20181.model;
+package br.uniriotec.pm20181.modelo.foguete;
 
 import lombok.Getter;
 import lombok.Setter;
 
-public class ComponenteMotor extends Componente {
+public class Motor extends Componente {
 
-    public ComponenteMotor() {
+    public Motor() {
         super(TiposComponente.COMPONENTE_MOTOR);
     }
 
+
+
     @Getter @Setter private String motor;
     @Getter @Setter private String fabricante;
+    @Getter @Setter private double pesoCombustivel;
+    @Getter @Setter private double pesoTotal;
+    @Getter @Setter private double tempoImpulso;
 
     @Override
     double getMassa() {

@@ -1,8 +1,8 @@
-package br.uniriotec.pm20181.model;
+package br.uniriotec.pm20181.modelo.foguete;
 
-public class ComponenteControle extends Componente {
+public class Controle extends Componente {
 
-    public ComponenteControle() {
+    public Controle() {
         super(TiposComponente.COMPONENTE_CONTROLE);
     }
 
