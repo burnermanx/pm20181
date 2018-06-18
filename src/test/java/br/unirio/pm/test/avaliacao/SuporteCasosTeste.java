@@ -1,9 +1,11 @@
 package br.unirio.pm.test.avaliacao;
 
+import br.uniriotec.pm20181.controle.HistoricoSimulador;
+import br.uniriotec.pm20181.controle.Simulador;
+
 import static org.junit.Assert.assertEquals;
 
-import br.unirio.pm.controle.HistoricoSimulador;
-import br.unirio.pm.controle.Simulador;
+
 
 public class SuporteCasosTeste
 {

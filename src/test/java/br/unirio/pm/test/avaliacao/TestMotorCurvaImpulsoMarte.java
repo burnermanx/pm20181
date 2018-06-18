@@ -1,22 +1,24 @@
 package br.unirio.pm.test.avaliacao;
 
+import br.uniriotec.pm20181.controle.Simulador;
+import br.uniriotec.pm20181.modelo.ambiente.Ambiente;
+import br.uniriotec.pm20181.modelo.ambiente.FabricaAmbientes;
+import br.uniriotec.pm20181.modelo.foguete.Foguete;
+import br.uniriotec.pm20181.modelo.plano.PlanoVoo;
+import br.uniriotec.pm20181.servico.CarregadorFoguete;
+import br.uniriotec.pm20181.servico.CarregadorPlanoVoo;
+import br.uniriotec.pm20181.servico.ServicoMotores;
+import br.uniriotec.pm20181.servico.ServicoMotoresThrustCurve;
 import org.junit.Test;
 
-import br.unirio.pm.controle.Simulador;
-import br.unirio.pm.modelo.ambiente.Ambiente;
-import br.unirio.pm.modelo.ambiente.FabricaAmbientes;
-import br.unirio.pm.modelo.foguete.Foguete;
-import br.unirio.pm.modelo.plano.PlanoVoo;
-import br.unirio.pm.servico.CarregadorFoguete;
-import br.unirio.pm.servico.CarregadorPlanoVoo;
-import br.unirio.pm.servico.ServicoMotores;
+
 
 public class TestMotorCurvaImpulsoMarte
 {
 	@Test
 	public void testCicloCurto()
 	{
-		ServicoMotores servicoMotores = new ServicoMotores();
+		ServicoMotores servicoMotores = new ServicoMotoresThrustCurve();
 		Foguete foguete = new CarregadorFoguete().carrega("data/avaliacao/foguete-01-descricao.xml", servicoMotores);
 		PlanoVoo plano = new CarregadorPlanoVoo().carrega("data/avaliacao/foguete-01-plano-01.xml", foguete);
 
@@ -59,7 +61,7 @@ public class TestMotorCurvaImpulsoMarte
 	@Test
 	public void testCicloLongo()
 	{
-		ServicoMotores servicoMotores = new ServicoMotores();
+		ServicoMotores servicoMotores = new ServicoMotoresThrustCurve();
 		Foguete foguete = new CarregadorFoguete().carrega("data/avaliacao/foguete-01-descricao.xml", servicoMotores);
 		PlanoVoo plano = new CarregadorPlanoVoo().carrega("data/avaliacao/foguete-01-plano-01.xml", foguete);
 
