@@ -3,6 +3,7 @@ package br.uniriotec.pm20181.servico;
 import br.uniriotec.pm20181.modelo.foguete.Motor;
 import br.uniriotec.pm20181.modelo.webservice.SearchRequest;
 import br.uniriotec.pm20181.modelo.webservice.SearchResponse;
+import br.uniriotec.pm20181.modelo.webservice.SearchResult;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class ServicoMotoresThrustCurve implements ServicoMotores {
 
             if (searchResponse != null && searchResponse.getResults() != null
                     && !searchResponse.getResults().isEmpty()) {
-                SearchResponse.SearchResult result = searchResponse.getResults().get(0);
+                SearchResult result = searchResponse.getResults().get(0);
 
                 Motor motor = new Motor();
                 motor.setPesoCombustivel(result.getPropWeight());
