@@ -16,6 +16,7 @@ public class SearchResponse {
     @Attribute(name = "schemaLocation") String schemaLocation;
     @Getter @ElementList(name = "results") List<SearchResult> results;
     @Getter @Element(name = "criteria") SearchCriteria criteria;
+    @Getter @Element(name = "error", required = false) String error;
 
     public static SearchResponse fromXml(String xml) {
         try {
