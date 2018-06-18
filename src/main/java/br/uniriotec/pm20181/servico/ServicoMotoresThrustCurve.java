@@ -8,6 +8,9 @@ import java.io.IOException;
 
 public class ServicoMotoresThrustCurve implements ServicoMotores {
 
+    private static final String SERVICE_URL = "http://www.thrustcurve.org/servlets/search";
+    private static final String MEDIA_XML = "text/xml;charset=ISO-8859-1";
+
     private OkHttpClient httpClient = new OkHttpClient.Builder()
             .build();
 
@@ -18,10 +21,10 @@ public class ServicoMotoresThrustCurve implements ServicoMotores {
                 .withManufacturer(fabricante)
                 .build();
 
-        RequestBody requestBody = RequestBody.create(MediaType.parse("text/xml;charset=ISO-8859-1"), searchRequest.toXml());
+        RequestBody requestBody = RequestBody.create(MediaType.parse(MEDIA_XML), searchRequest.toXml());
 
         Request request = new Request.Builder()
-                .url("http://www.thrustcurve.org/servlets/search")
+                .url(SERVICE_URL)
                 .post(requestBody)
                 .build();
 
