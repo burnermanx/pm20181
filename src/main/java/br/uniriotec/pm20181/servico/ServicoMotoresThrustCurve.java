@@ -21,6 +21,7 @@ public class ServicoMotoresThrustCurve implements ServicoMotores {
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/xml;charset=ISO-8859-1"), searchRequest.toXml());
 
         Request request = new Request.Builder()
+                .url("http://www.thrustcurve.org/servlets/search")
                 .post(requestBody)
                 .build();
 
