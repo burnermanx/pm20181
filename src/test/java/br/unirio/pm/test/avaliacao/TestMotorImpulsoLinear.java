@@ -1,7 +1,6 @@
 package br.unirio.pm.test.avaliacao;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
