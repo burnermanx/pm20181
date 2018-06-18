@@ -1,5 +1,6 @@
 package br.uniriotec.pm20181.servico;
 
+import br.uniriotec.pm20181.modelo.foguete.Motor;
 import br.uniriotec.pm20181.modelo.webservice.SearchRequest;
 import br.uniriotec.pm20181.modelo.webservice.SearchResponse;
 import okhttp3.*;
@@ -15,7 +16,7 @@ public class ServicoMotoresThrustCurve implements ServicoMotores {
             .build();
 
     @Override
-    public void pegarDadosMotor(String fabricante, String modelo, CallbackServico callback) {
+    public Motor pegaMotor(String fabricante, String modelo) {
         SearchRequest searchRequest = new SearchRequest.Builder()
                 .withCommonName(modelo)
                 .withManufacturer(fabricante)
@@ -28,20 +29,34 @@ public class ServicoMotoresThrustCurve implements ServicoMotores {
                 .post(requestBody)
                 .build();
 
-        httpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                callback.onRequestFinished(false, null);
+        try {
+            Response response = httpClient.newCall(request).execute();
+            SearchResponse searchResponse = response.body() != null ?
+                    SearchResponse.fromXml(response.body().string()) : null;
+
+            if (searchResponse != null && searchResponse.getResults() != null
+                    && !searchResponse.getResults().isEmpty()) {
+                SearchResponse.SearchResult result = searchResponse.getResults().get(0);
+
+                Motor motor = new Motor();
+                motor.setPesoCombustivel(result.getPropWeight());
+                motor.setPesoTotal(result.getTotalWeight());
+                motor.setTempoImpulso(result.getTotalImpulseNs());
+                motor.setFabricante(result.getManufacturer());
+                motor.setNome(result.getCommonName());
+
+                return motor;
             }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                SearchResponse searchResponse = response.body() != null ?
-                        SearchResponse.fromXml(response.body().string()) : null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-                callback.onRequestFinished(searchResponse != null, searchResponse);
-            }
-        });
+        return null;
+    }
+
+    @Override
+    public boolean carregaImpulso(Motor motor) {
+        return false;
     }
 }
