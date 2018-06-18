@@ -6,8 +6,6 @@ import br.uniriotec.pm20181.modelo.webservice.SearchResponse;
 import br.uniriotec.pm20181.modelo.webservice.SearchResult;
 import okhttp3.*;
 
-import java.io.IOException;
-
 public class ServicoMotoresThrustCurve implements ServicoMotores {
 
     private static final String SERVICE_URL = "http://www.thrustcurve.org/servlets/search";
