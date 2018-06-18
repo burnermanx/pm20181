@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plano>
+	<acao nome="motor3" tempo="0" tipo="disparo"/>
+	<acao nome="motor4" tempo="0" tipo="disparo"/>
+
+	<acao nome="motor3" tempo="8" tipo="desconexao"/>
+	<acao nome="motor4" tempo="8" tipo="desconexao"/>
+	<acao nome="motor2" tempo="8" tipo="disparo"/>
+
+	<acao nome="motor2" tempo="16" tipo="desconexao"/>
+	<acao nome="motor1" tempo="16" tipo="disparo"/>
+
+	<acao nome="motor1" tempo="24" tipo="desconexao"/>
+
+	<acao nome="load" tempo="32" tipo="desconexao"/>
+</plano>

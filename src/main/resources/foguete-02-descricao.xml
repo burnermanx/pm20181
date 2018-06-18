@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foguete cd="0.75">
+	<controle nome="ctrl">
+		<peso>1.0</peso>
+		<diametro>0.076</diametro>
+	</controle>
+	
+	<paraquedas nome="pqd">
+		<peso>0.1</peso>
+		<diametro>0.35</diametro>
+		<cd>1.5</cd>
+	</paraquedas>
+
+	<componente tipo="console-carga" nome="load">
+		<peso>0.0144</peso>
+		<diametro>0.067</diametro>
+		<pesoCarga>4.0</pesoCarga>
+	</componente>
+
+	<componente tipo="console-motor" nome="motor">
+		<peso>0.0144</peso>
+		<diametro>0.076</diametro>
+		<motor fabricante="Ellis" nome="L600"/>
+	</componente>
+	
+	<conexao base="ctrl" componente="load" direcao="abaixo"/>
+	<conexao base="load" componente="motor" direcao="abaixo"/>
+</foguete>

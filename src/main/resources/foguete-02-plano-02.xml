@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plano>
+	<acao nome="motor" tempo="0" tipo="disparo"/>
+	<acao nome="motor" tempo="8" tipo="desconexao"/>
+	<acao nome="load" tempo="12" tipo="desconexao"/>
+	<acao nome="pqd" tempo="50" tipo="disparo"/>
+</plano>
