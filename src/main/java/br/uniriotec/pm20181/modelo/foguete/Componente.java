@@ -1,6 +1,10 @@
 package br.uniriotec.pm20181.modelo.foguete;
 
+import br.uniriotec.pm20181.modelo.ambiente.Ambiente;
+import br.uniriotec.pm20181.modelo.plano.Acao;
+import br.uniriotec.pm20181.servico.ServicoMotores;
 import br.uniriotec.pm20181.util.AreaUtil;
+import br.uniriotec.pm20181.util.XmlUtils;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -10,10 +14,10 @@ import java.util.*;
 public abstract class Componente {
     @Getter @Setter private String tipo;
     @Getter @Setter private String nome;
-    @Getter @Setter private double peso;
+    @Getter @Setter protected double peso;
     @Getter @Setter private double diametro;
-    @Getter @Setter private boolean ativado;
-    private Map<Direcao, Componente> componentes = new HashMap<>();
+    @Getter @Setter protected boolean ativado;
+    protected Map<Direcao, Componente> componentes = new HashMap<>();
 
     public Componente(String tipo) {
         this.tipo = tipo;
@@ -81,18 +85,13 @@ public abstract class Componente {
 
     protected abstract Componente clone();
 
-    void processaComando(Comandos comando) {
+    void processaComando(Acao acao) {
 
     }
 
-
-    /*
-    void adicionaForcas(sistemaForcas, foguete, intervaloTempo) {
+    void adicionaForcas(Ambiente ambiente, Foguete foguete, int intervaloTempo) {
 
     }
 
-
-
-    abstract boolean fromXml(xmlComponente, servicoMotores);
-        */
+    abstract boolean fromXml(XmlUtils xmlUtils, ServicoMotores servicoMotores);
 }

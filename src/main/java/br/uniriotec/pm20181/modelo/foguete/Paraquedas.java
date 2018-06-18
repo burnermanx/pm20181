@@ -1,5 +1,7 @@
 package br.uniriotec.pm20181.modelo.foguete;
 
+import br.uniriotec.pm20181.servico.ServicoMotores;
+import br.uniriotec.pm20181.util.XmlUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,11 +15,16 @@ public class Paraquedas extends Componente {
 
     @Override
     double getMassa() {
-        return 0;
+        return this.peso;
     }
 
     @Override
     protected Componente clone() {
         return null;
+    }
+
+    @Override
+    boolean fromXml(XmlUtils xmlUtils, ServicoMotores servicoMotores) {
+        return false;
     }
 }
