@@ -33,7 +33,7 @@ public class TestServicoMotor {
         assertNotNull(motorEllis600);
         assertEquals(motorEllis600.getFabricante(), "Ellis");
         assertEquals(motorEllis600.getNome(), "L600");
-        assertEquals(new Double(motorEllis600.getPesoTotal()), ELLIS_600_PESO_TOTAL);
-        assertEquals(new Double(motorEllis600.getTempoImpulso()), ELLIS_600_TEMPO_IMPULSO);
+        assertEquals(motorEllis600.getPesoTotal(), ELLIS_600_PESO_TOTAL);
+        assertEquals(motorEllis600.getTempoImpulso(), ELLIS_600_TEMPO_IMPULSO);
     }
 }
