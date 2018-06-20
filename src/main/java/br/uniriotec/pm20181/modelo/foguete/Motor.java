@@ -13,12 +13,12 @@ public class Motor extends Componente {
 
     private @Getter @Setter String motor;
     private @Getter @Setter String fabricante;
-    private @Getter @Setter double pesoTotal;
-    private @Getter @Setter double pesoCombustivel;
-    private @Getter @Setter double tempoImpulso;
+    private @Getter @Setter Double pesoTotal;
+    private @Getter @Setter Double pesoCombustivel;
+    private @Getter @Setter Double tempoImpulso;
 
     @Override
-    double getMassa() {
+    Double getMassa() {
         return super.getMassa() + pesoCombustivel + pesoTotal;
     }
 

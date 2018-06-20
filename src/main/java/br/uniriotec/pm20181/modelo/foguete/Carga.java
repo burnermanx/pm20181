@@ -12,10 +12,10 @@ public class Carga extends Componente {
     }
 
     @Getter @Setter
-    private double pesoCarga;
+    private Double pesoCarga;
 
     @Override
-    double getMassa() {
+    Double getMassa() {
         return super.getMassa() + pesoCarga;
     }
 

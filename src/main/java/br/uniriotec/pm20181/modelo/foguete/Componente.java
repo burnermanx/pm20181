@@ -14,9 +14,9 @@ import java.util.*;
 public abstract class Componente {
     @Getter @Setter private String tipo;
     @Getter @Setter private String nome;
-    @Getter @Setter protected double peso;
-    @Getter @Setter private double diametro;
-    @Getter @Setter protected boolean ativado;
+    @Getter @Setter protected Double peso;
+    @Getter @Setter private Double diametro;
+    @Getter @Setter protected Boolean ativado;
     protected Map<Direcao, Componente> componentes = new HashMap<>();
 
     public Componente(String tipo) {
@@ -49,7 +49,7 @@ public abstract class Componente {
         return null;
     }
 
-    double getMassa() {
+    Double getMassa() {
         double pesoTotal = this.peso;
 
         //Se não tenho componentes anexados ao componente, retorne o peso do próprio
@@ -67,7 +67,7 @@ public abstract class Componente {
         return pesoTotal;
     }
 
-    double getArea() {
+    Double getArea() {
         double areaRedor = AreaUtil.areaCirculo(this.diametro);
 
         //Se não tenho componentes ao redor do componente, retorne a área do próprio.

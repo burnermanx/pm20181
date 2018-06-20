@@ -11,7 +11,7 @@ public class Paraquedas extends Componente {
         super(TiposComponente.COMPONENTE_PARAQUEDAS);
     }
 
-    @Getter @Setter private double cd;
+    @Getter @Setter private Double cd;
 
     @Override
     protected Componente clone() {
