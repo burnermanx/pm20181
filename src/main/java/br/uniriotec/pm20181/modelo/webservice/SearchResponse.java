@@ -30,7 +30,7 @@ public class SearchResponse {
 
     @Root(name = "criteria")
     public static class SearchCriteria {
-        @Getter @ElementList(inline = true, type = SearchCriteriaData.class) List<SearchCriteriaData> dataList;
+        @Getter @ElementList(inline = true, type = SearchCriteriaData.class, required = false) List<SearchCriteriaData> dataList;
         @Getter @Element(name = "matches") int matches;
         @Getter @Element(name = "error", required = false) String error;
     }
@@ -45,7 +45,7 @@ public class SearchResponse {
 
     @Root(name = "result")
     public static class SearchResult {
-        @Getter @Element(name = "motor-id", required = false) long motorId;
+        @Getter @Element(name = "motor-id") long motorId;
         @Getter @Element(name = "common-name", required = false) String commonName;
         @Getter @Element(name = "manufacturer", required = false) String manufacturer;
         @Getter @Element(name = "manufacturer-abbrev", required = false) String manufacturerAbbrev;
