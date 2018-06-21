@@ -10,6 +10,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+
+//Essa classe tem como funcionalidade testar o consumo do serviço online
+
 public class TestServicoMotor {
 
     private static ServicoMotores servicoMotores;
@@ -26,6 +29,7 @@ public class TestServicoMotor {
         Motor motorVazio = servicoMotores.pegaMotor("teste", "teste");
         assertNull(motorVazio);
     }
+
 
     @Test
     public void testeServicoBuscaEllisL600() {

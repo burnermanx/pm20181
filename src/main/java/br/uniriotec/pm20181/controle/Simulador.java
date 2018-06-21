@@ -1,12 +1,12 @@
 package br.uniriotec.pm20181.controle;
 
-import br.uniriotec.pm20181.modelo.ambiente.Ambiente;
-import br.uniriotec.pm20181.modelo.foguete.Foguete;
-import br.uniriotec.pm20181.modelo.plano.PlanoVoo;
-import lombok.Getter;
+        import br.uniriotec.pm20181.modelo.ambiente.Ambiente;
+        import br.uniriotec.pm20181.modelo.foguete.Foguete;
+        import br.uniriotec.pm20181.modelo.plano.PlanoVoo;
+        import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
 public class Simulador {
     private List<HistoricoSimulador> listaHistorico = new ArrayList<>();

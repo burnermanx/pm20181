@@ -46,6 +46,7 @@ public class ServicoMotoresThrustCurve implements ServicoMotores {
                 SearchResponse.SearchResult result = searchResponse.getResults().get(0);
 
                 Motor motor = new Motor();
+                motor.setId(result.getMotorId());
                 motor.setPesoCombustivel(result.getPropWeight());
                 motor.setPesoTotal(result.getTotalWeight());
                 motor.setTempoImpulso(result.getTotalImpulseNs());

@@ -5,6 +5,10 @@ import br.uniriotec.pm20181.util.XmlUtils;
 import lombok.Getter;
 import lombok.Setter;
 
+
+/**
+ *  Classe responsável pelo componente de carga
+ */
 public class Carga extends Componente {
 
     public Carga() {

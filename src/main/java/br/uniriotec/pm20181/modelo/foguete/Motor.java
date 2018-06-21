@@ -11,6 +11,7 @@ public class Motor extends Componente {
         super(TiposComponente.COMPONENTE_MOTOR);
     }
 
+    private @Getter @Setter Long id;
     private @Getter @Setter String motor;
     private @Getter @Setter String fabricante;
     private @Getter @Setter Double pesoTotal;
@@ -19,7 +20,7 @@ public class Motor extends Componente {
 
     @Override
     Double getMassa() {
-        return super.getMassa() + pesoCombustivel + pesoTotal;
+        return super.getMassa() + pesoTotal;
     }
 
     public void adicionaImpulso(double a, double b) {

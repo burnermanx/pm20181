@@ -11,6 +11,10 @@ import lombok.Setter;
 
 import java.util.*;
 
+/**
+ * Classe abstrata referente a um componente que constitui um foguete
+ */
+
 public abstract class Componente {
     @Getter @Setter private String tipo;
     @Getter @Setter private String nome;
@@ -19,23 +23,49 @@ public abstract class Componente {
     @Getter @Setter protected Boolean ativado;
     protected Map<Direcao, Componente> componentes = new HashMap<>();
 
+
+    /**
+     * O cosntrutor rece o tipo do componente
+     * @param tipo
+     */
     public Componente(String tipo) {
         this.tipo = tipo;
     }
 
+
+    /**
+     * Anexa um componente ao próprio na direção especificada
+     * @param direcao
+     * @param componente
+     */
     void adicionaComponenteConectado(Direcao direcao, Componente componente) {
         componentes.put(direcao, componente);
     }
 
+
+    /**
+     * Busca um componente dada a sua direção
+     * @param direcao
+     *  @return retorna um objeto Componente ou nulo se o componente não for encontrado
+     */
     Componente pegaComponenteConectado(Direcao direcao) {
         return componentes.get(direcao);
     }
 
+
+    /**
+     * Busca um componente dado seu nome
+     * @param nome
+     * @return  retorna um objeto Componente ou nulo se o componente não for encontrado
+     */
     Componente pegaComponenteNome(@NonNull String nome) {
+        //Se o nome do componente sendo pesquisado já for do próprio, retorne
         if (nome.contentEquals(this.nome)) {
             return this;
         }
 
+
+        //Criando lista com todos os objetos de componente anexados a sua volta
         List<Componente> componentesDisponiveis = new ArrayList<>(componentes.values());
 
         for (Componente componente : componentesDisponiveis) {
@@ -45,18 +75,19 @@ public abstract class Componente {
                 return componenteEncontrado;
             }
         }
-
+        //Caso nenhum componente tenha sido encontrado, retorna nulo
         return null;
     }
+
 
     Double getMassa() {
         double pesoTotal = this.peso;
 
-        //Se não tenho componentes anexados ao componente, retorne o peso do próprio
+        //Se não tem componentes anexados ao componente, retorne o peso do próprio
         if (componentes.isEmpty()) {
             return pesoTotal;
         }
-
+        //Criando lista de componentescom todos os objetos de componentes conectados
         List<Componente> componentesConectados = new ArrayList<>();
         componentes.forEach((direcao, componente) -> componentesConectados.add(componente));
 
@@ -67,6 +98,10 @@ public abstract class Componente {
         return pesoTotal;
     }
 
+    /**
+     * Calcular a área do foguete vista por cima, dado o componente.
+     * @return a maior área possível do foguete visto por cima
+     */
     Double getArea() {
         double areaRedor = AreaUtil.areaCirculo(this.diametro);
 

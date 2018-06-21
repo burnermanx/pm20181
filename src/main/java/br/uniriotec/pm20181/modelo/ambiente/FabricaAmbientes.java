@@ -1,5 +1,7 @@
 package br.uniriotec.pm20181.modelo.ambiente;
 
+
+
 public class FabricaAmbientes {
     public static FabricaAmbientes instance;
 
