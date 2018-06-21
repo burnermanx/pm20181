@@ -14,6 +14,9 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+/**
+ * Implementação da classe ServicoMotores para a api do ThrustCurve
+ */
 public class ServicoMotoresThrustCurve implements ServicoMotores {
 
     private static final String SERVICE_URL = "http://www.thrustcurve.org/servlets/";
