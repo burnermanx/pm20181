@@ -35,8 +35,8 @@ public class TestServicoMotor {
     public void testeServicoBuscaEllisL600() {
         Motor motorEllis600 = servicoMotores.pegaMotor("Ellis", "L600");
         assertNotNull(motorEllis600);
-        assertEquals(motorEllis600.getFabricante(), "Ellis");
-        assertEquals(motorEllis600.getNome(), "L600");
+        assertEquals(motorEllis600.getFabricante(), "Ellis Mountain");
+        assertEquals(motorEllis600.getMotor(), "L600");
         assertEquals(motorEllis600.getPesoTotal(), ELLIS_600_PESO_TOTAL);
         assertEquals(motorEllis600.getTempoImpulso(), ELLIS_600_TEMPO_IMPULSO);
     }
