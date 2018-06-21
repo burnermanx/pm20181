@@ -1,14 +1,24 @@
 package br.uniriotec.pm20181.servico;
 
 import br.uniriotec.pm20181.modelo.foguete.Motor;
+import br.uniriotec.pm20181.modelo.webservice.DownloadRequest;
 import br.uniriotec.pm20181.modelo.webservice.SearchRequest;
 import br.uniriotec.pm20181.modelo.webservice.SearchResponse;
+import br.uniriotec.pm20181.util.XmlUtils;
 import okhttp3.*;
 import okhttp3.logging.HttpLoggingInterceptor;
+import org.w3c.dom.Element;
+
+import javax.xml.bind.DatatypeConverter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 public class ServicoMotoresThrustCurve implements ServicoMotores {
 
-    private static final String SERVICE_URL = "http://www.thrustcurve.org/servlets/search";
+    private static final String SERVICE_URL = "http://www.thrustcurve.org/servlets/";
+    private static final String ENPOINT_SEARCH = "search";
+    private static final String ENDPOINT_DOWNLOAD = "download";
     private static final String MEDIA_XML = "text/xml;charset=ISO-8859-1";
 
     final private OkHttpClient httpClient;
@@ -29,12 +39,7 @@ public class ServicoMotoresThrustCurve implements ServicoMotores {
                 .withManufacturer(fabricante)
                 .build();
 
-        RequestBody requestBody = RequestBody.create(MediaType.parse(MEDIA_XML), searchRequest.toXml());
-
-        Request request = new Request.Builder()
-                .url(SERVICE_URL)
-                .post(requestBody)
-                .build();
+        Request request = createRequest(SERVICE_URL + ENPOINT_SEARCH, searchRequest.toXml());
 
         try {
             Response response = httpClient.newCall(request).execute();
@@ -53,6 +58,8 @@ public class ServicoMotoresThrustCurve implements ServicoMotores {
                 motor.setFabricante(result.getManufacturer());
                 motor.setMotor(result.getCommonName());
 
+                carregaImpulso(motor);
+
                 return motor;
             }
 
@@ -65,6 +72,52 @@ public class ServicoMotoresThrustCurve implements ServicoMotores {
 
     @Override
     public boolean carregaImpulso(Motor motor) {
+        try {
+            DownloadRequest downloadRequest = new DownloadRequest.Builder()
+                    .withMotorId(motor.getId())
+                    .build();
+
+            Request request = createRequest(SERVICE_URL + ENDPOINT_DOWNLOAD, downloadRequest.toXml());
+
+            Response response = httpClient.newCall(request).execute();
+            if (response != null && response.isSuccessful() && response.body() != null) {
+                String responseXml = response.body().string();
+                Element root = XmlUtils.getRootElementFromXmlString(responseXml, StandardCharsets.ISO_8859_1.name());
+                Element results = XmlUtils.getSingleElement(root, "results");
+                Element result = XmlUtils.getSingleElement(results, "result");
+
+                String binData = XmlUtils.getStringNode(result, "data");
+                String data = new String(DatatypeConverter.parseBase64Binary(binData));
+
+                Element dataRoot = XmlUtils.getRootElementFromXmlString(data, StandardCharsets.ISO_8859_1.name());
+                Element dataEngineList = XmlUtils.getSingleElement(dataRoot, "engine-list");
+                Element dataEngine = XmlUtils.getSingleElement(dataEngineList, "engine");
+                Element dataEngineData = XmlUtils.getSingleElement(dataEngine, "data");
+                List<Element> engData = XmlUtils.getElements(dataEngineData, "eng-data");
+
+                for (Element element : engData) {
+                    double f = XmlUtils.getDoubleAttribute(element, "f");
+                    double m = XmlUtils.getDoubleAttribute(element, "m");
+
+                    motor.adicionaImpulso(f, m);
+                }
+
+                return true;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
+    }
+
+    private Request createRequest(String url, String body) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse(MEDIA_XML), body);
+
+        return new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
     }
 }

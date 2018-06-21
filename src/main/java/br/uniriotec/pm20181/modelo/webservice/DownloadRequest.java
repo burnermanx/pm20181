@@ -7,7 +7,7 @@ import org.simpleframework.xml.core.Persister;
 import java.io.ByteArrayOutputStream;
 
 @Root(name = "download-request")
-public class DownloadRequest {
+public class DownloadRequest extends AbstractRequest {
     private DownloadRequest(){}
     private DownloadRequest(Builder builder) {
         this.motorId = builder.motorId;
@@ -16,18 +16,6 @@ public class DownloadRequest {
 
     @Element(name = "motor-id") private Long motorId;
     @Element(name = "format") private String format;
-
-    public String toXml() {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        try {
-            new Persister().write(this, os);
-            return new String(os.toByteArray(),"ISO-8859-1");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return "";
-    }
 
     public static class Builder {
         private Long motorId = 0L;

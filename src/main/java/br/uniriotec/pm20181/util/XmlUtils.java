@@ -1,7 +1,9 @@
 package br.uniriotec.pm20181.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +21,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
  *
  * @author marcio.barros
  */
-public class XmlUtils
-{
+public class XmlUtils {
     /**
-     * Retorna um objeto Document para um string de xml passado
+     * Retorna um objeto Element para um string de xml passado
      */
     @Nullable
     public static Element getRootElementFromXmlFile(String fileLocation) {
@@ -33,12 +34,7 @@ public class XmlUtils
             File file = new File(resource.getFile());
 
             try {
-                FileInputStream fis = new FileInputStream(file);
-                DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-                Document document = builder.parse(fis);
-                document.getDocumentElement().normalize();
-
-                return document.getDocumentElement();
+                return getRootElement(new FileInputStream(file));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -48,14 +44,45 @@ public class XmlUtils
     }
 
     /**
+     * Retorna um objeto Element para um string de xml passado
+     */
+    @Nullable
+    public static Element getRootElementFromXmlString(String xmlString, String charset) {
+        try {
+            return getRootElement(new ByteArrayInputStream(xmlString.getBytes(charset)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * Retorna um objeto Element para um input stream passado
+     * @param is InputStream
+     * @return Element referente ao root do xml
+     */
+    private static Element getRootElement(InputStream is) {
+        try {
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document document = builder.parse(is);
+            document.getDocumentElement().normalize();
+
+            return document.getDocumentElement();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
      * Retorna um no filho unico de uma tag
      */
-    public static Element getSingleElement(Element element, String tagName)
-    {
+    public static Element getSingleElement(Element element, String tagName) {
         Node node = element.getFirstChild();
 
-        while (node != null)
-        {
+        while (node != null) {
             if (node.getNodeType() == Node.ELEMENT_NODE && node.getNodeName().compareTo(tagName) == 0)
                 return (Element) node;
 
@@ -68,13 +95,11 @@ public class XmlUtils
     /**
      * Retorna uma lista de elementos filhos de um n�
      */
-    public static List<Element> getElements(Element element, String tagName)
-    {
+    public static List<Element> getElements(Element element, String tagName) {
         Node node = element.getFirstChild();
         List<Element> elements = new ArrayList<Element>();
 
-        while (node != null)
-        {
+        while (node != null) {
             if (node.getNodeType() == Node.ELEMENT_NODE && node.getNodeName().compareTo(tagName) == 0)
                 elements.add((Element) node);
 
@@ -87,8 +112,7 @@ public class XmlUtils
     /**
      * Loads an optional string attribute from a XML element
      */
-    public static String getStringAttribute(Element element, String name)
-    {
+    public static String getStringAttribute(Element element, String name) {
         String value = element.getAttribute(name);
         return (value != null) ? value : "";
     }
@@ -96,8 +120,7 @@ public class XmlUtils
     /**
      * Loads an optional integer attribute from a XML element
      */
-    public static int getIntAttribute(Element element, String name)
-    {
+    public static int getIntAttribute(Element element, String name) {
         String value = element.getAttribute(name);
 
         if (value == null)
@@ -112,8 +135,7 @@ public class XmlUtils
     /**
      * Loads an optional double attribute from a XML element
      */
-    public static double getDoubleAttribute(Element element, String name)
-    {
+    public static double getDoubleAttribute(Element element, String name) {
         String value = element.getAttribute(name);
 
         if (value == null)
@@ -128,8 +150,7 @@ public class XmlUtils
     /**
      * Loads an optional boolean attribute from a XML element
      */
-    public static boolean getBooleanAttribute(Element element, String name)
-    {
+    public static boolean getBooleanAttribute(Element element, String name) {
         String value = element.getAttribute(name);
 
         if (value == null)
@@ -144,16 +165,14 @@ public class XmlUtils
     /**
      * Loads an optional string element value from a XML element
      */
-    public static String getStringNode(Element element, String name)
-    {
+    public static String getStringNode(Element element, String name) {
         return getStringNode(element, name, "");
     }
 
     /**
      * Loads an optional string element value from a XML element
      */
-    public static String getStringNode(Element element, String name, String _default)
-    {
+    public static String getStringNode(Element element, String name, String _default) {
         Element child = getSingleElement(element, name);
 
         if (child == null)
@@ -170,16 +189,14 @@ public class XmlUtils
     /**
      * Loads an optional integer element value from a XML element
      */
-    public static int getIntNode(Element element, String name)
-    {
+    public static int getIntNode(Element element, String name) {
         return getIntNode(element, name, 0);
     }
 
     /**
      * Loads an optional integer element value from a XML element
      */
-    public static int getIntNode(Element element, String name, int _default)
-    {
+    public static int getIntNode(Element element, String name, int _default) {
         Element child = getSingleElement(element, name);
 
         if (child == null)
@@ -199,8 +216,7 @@ public class XmlUtils
     /**
      * Loads an optional Boolean element value from a XML element
      */
-    public static boolean getBooleanNode(Element element, String name, boolean _default)
-    {
+    public static boolean getBooleanNode(Element element, String name, boolean _default) {
         Element child = getSingleElement(element, name);
 
         if (child == null)
@@ -223,8 +239,7 @@ public class XmlUtils
     /**
      * Loads an optional double element value from a XML element
      */
-    public static double getDoubleNode(Element element, String name)
-    {
+    public static double getDoubleNode(Element element, String name) {
         Element child = getSingleElement(element, name);
 
         if (child == null)
@@ -244,8 +259,7 @@ public class XmlUtils
     /**
      * Creates an element without text content
      */
-    public static Element createElement(Element parent, Document document, String name)
-    {
+    public static Element createElement(Element parent, Document document, String name) {
         Element element = document.createElement(name);
         parent.appendChild(element);
         return element;
@@ -254,8 +268,7 @@ public class XmlUtils
     /**
      * Creates an element with a given text content
      */
-    public static Element createElement(Element parent, Document document, String name, String value)
-    {
+    public static Element createElement(Element parent, Document document, String name, String value) {
         Element element = createElement(parent, document, name);
         element.setTextContent(value);
         return element;
@@ -264,56 +277,49 @@ public class XmlUtils
     /**
      * Creates an element with content in the form of an integer
      */
-    public static Element createElement(Element parent, Document document, String name, int value)
-    {
+    public static Element createElement(Element parent, Document document, String name, int value) {
         return createElement(parent, document, name, Integer.toString(value));
     }
 
     /**
      * Creates an element with content in the form of a Boolean
      */
-    public static Element createElement(Element parent, Document document, String name, boolean value)
-    {
+    public static Element createElement(Element parent, Document document, String name, boolean value) {
         return createElement(parent, document, name, value ? "S" : "N");
     }
 
     /**
      * Creates an element with content in the form of a double
      */
-    public static Element createElement(Element parent, Document document, String name, double value)
-    {
+    public static Element createElement(Element parent, Document document, String name, double value) {
         return createElement(parent, document, name, Double.toString(value));
     }
 
     /**
      * Creates an attribute with a given text content
      */
-    public static void setAttribute(Element element, String name, String value)
-    {
+    public static void setAttribute(Element element, String name, String value) {
         element.setAttribute(name, value);
     }
 
     /**
      * Creates an attribute with content in the form of an integer
      */
-    public static void setAttribute(Element element, String name, int value)
-    {
+    public static void setAttribute(Element element, String name, int value) {
         setAttribute(element, name, Integer.toString(value));
     }
 
     /**
      * Creates an attribute with content in the form of a Boolean
      */
-    public static void setAttribute(Element element, String name, boolean value)
-    {
+    public static void setAttribute(Element element, String name, boolean value) {
         setAttribute(element, name, value ? "S" : "N");
     }
 
     /**
      * Creates an attribute with content in the form of a double
      */
-    public static void setAttribute(Element element, String name, double value)
-    {
+    public static void setAttribute(Element element, String name, double value) {
         setAttribute(element, name, Double.toString(value));
     }
 }
