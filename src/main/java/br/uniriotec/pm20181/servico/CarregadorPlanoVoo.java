@@ -39,6 +39,7 @@ public class CarregadorPlanoVoo {
             }
 
             foguete.setPlanoVoo(planoVoo);
+            return planoVoo;
         }
 
         return null;
