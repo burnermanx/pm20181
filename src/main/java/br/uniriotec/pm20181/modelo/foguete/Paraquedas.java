@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.w3c.dom.Element;
 
+/**
+ * Classe que representa um componente de paraquedas
+ */
 public class Paraquedas extends Componente {
 
     public Paraquedas() {

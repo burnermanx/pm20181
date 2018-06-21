@@ -9,6 +9,9 @@ import org.w3c.dom.Element;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe que representa o componente de Motor
+ */
 public class Motor extends Componente {
 
     public Motor() {
@@ -34,6 +37,9 @@ public class Motor extends Componente {
         return super.getMassa() + pesoTotal;
     }
 
+    /**
+     * Adiciona um impulso ao motor
+     */
     public void adicionaImpulso(double f, double m) {
         listaImpulso.add(new Impulso(f, m));
     }
@@ -62,6 +68,9 @@ public class Motor extends Componente {
         return false;
     }
 
+    /**
+     * Classe boxing para impulso
+     */
     static class Impulso {
         Impulso(double f, double m) {
             this.f = f;
