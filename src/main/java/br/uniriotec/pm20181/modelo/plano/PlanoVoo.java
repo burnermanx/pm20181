@@ -19,4 +19,12 @@ public class PlanoVoo {
     public PlanoVoo(Acao... acoes) {
         listaAcoes.addAll(Arrays.asList(acoes));
     }
+
+    /**
+     * Adiciona uma ação ao plano de voo
+     * @param acao ação a ser adicionado ao plano de voo
+     */
+    public void addAcao(Acao acao) {
+        listaAcoes.add(acao);
+    }
 }
