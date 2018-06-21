@@ -45,28 +45,28 @@ public class SearchResponse {
 
     @Root(name = "result")
     public static class SearchResult {
-        @Getter @Element(name = "motor-id") long motorId;
-        @Getter @Element(name = "common-name") String commonName;
-        @Getter @Element(name = "manufacturer") String manufacturerName;
-        @Getter @Element(name = "manufacturer-abbrev") String manufacturer;
-        @Getter @Element(name = "designation") String designation;
-        @Getter @Element(name = "brand-name") String brandName;
-        @Getter @Element(name = "impulse-class") String impulseClass;
-        @Getter @Element(name = "cert-org") String certOrg;
-        @Getter @Element(name = "data-files") int dataFiles;
-        @Getter @Element(name = "info-url") String infoUrl;
-        @Getter @Element(name = "case-info") int caseInfo;
-        @Getter @Element(name = "updated-on") String updatedOn;
-        @Getter @Element(name = "availability") String availability;
-        @Getter @Element(name = "diameter") double diameter;
-        @Getter @Element(name = "length") double length;
-        @Getter @Element(name = "type") String type;
-        @Getter @Element(name = "total-weight-g") double totalWeight;
-        @Getter @Element(name = "prop-weight-g") double propWeight;
-        @Getter @Element(name = "burn-time-s") double burnTimeSecs;
-        @Getter @Element(name = "avg-thrust-n") double avgThrust;
-        @Getter @Element(name = "max-thrust-n") double maxThrust;
-        @Getter @Element(name = "tot-impulse-ns") double totalImpulseNs;
+        @Getter @Element(name = "motor-id", required = false) long motorId;
+        @Getter @Element(name = "common-name", required = false) String commonName;
+        @Getter @Element(name = "manufacturer", required = false) String manufacturer;
+        @Getter @Element(name = "manufacturer-abbrev", required = false) String manufacturerAbbrev;
+        @Getter @Element(name = "designation", required = false) String designation;
+        @Getter @Element(name = "brand-name", required = false) String brandName;
+        @Getter @Element(name = "impulse-class", required = false) String impulseClass;
+        @Getter @Element(name = "cert-org", required = false) String certOrg;
+        @Getter @Element(name = "data-files", required = false) int dataFiles;
+        @Getter @Element(name = "info-url", required = false) String infoUrl;
+        @Getter @Element(name = "case-info", required = false) int caseInfo;
+        @Getter @Element(name = "updated-on", required = false) String updatedOn;
+        @Getter @Element(name = "availability", required = false) String availability;
+        @Getter @Element(name = "diameter", required = false) double diameter;
+        @Getter @Element(name = "length", required = false) double length;
+        @Getter @Element(name = "type", required = false) String type;
+        @Getter @Element(name = "total-weight-g", required = false) double totalWeight;
+        @Getter @Element(name = "prop-weight-g", required = false) double propWeight;
+        @Getter @Element(name = "burn-time-s", required = false) double burnTimeSecs;
+        @Getter @Element(name = "avg-thrust-n", required = false) double avgThrust;
+        @Getter @Element(name = "max-thrust-n", required = false) double maxThrust;
+        @Getter @Element(name = "tot-impulse-ns", required = false) double totalImpulseNs;
         @Getter @Element(name = "error", required = false) String error;
     }
 }

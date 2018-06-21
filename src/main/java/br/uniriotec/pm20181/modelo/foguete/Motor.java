@@ -4,11 +4,17 @@ import br.uniriotec.pm20181.servico.ServicoMotores;
 import br.uniriotec.pm20181.util.XmlUtils;
 import lombok.Getter;
 import lombok.Setter;
+import org.w3c.dom.Element;
 
 public class Motor extends Componente {
 
     public Motor() {
         super(TiposComponente.COMPONENTE_MOTOR);
+    }
+
+    public Motor(Element xml) {
+        super(TiposComponente.COMPONENTE_MOTOR);
+        fromXml(xml);
     }
 
     private @Getter @Setter Long id;
@@ -38,7 +44,18 @@ public class Motor extends Componente {
     }
 
     @Override
-    boolean fromXml(XmlUtils xmlUtils, ServicoMotores servicoMotores) {
+    public boolean fromXml(Element xmlElement) {
+        try {
+            this.setNome(XmlUtils.getStringAttribute(xmlElement, "nome"));
+            this.setDiametro(XmlUtils.getDoubleNode(xmlElement, "diametro"));
+            this.setPeso(XmlUtils.getDoubleNode(xmlElement, "peso"));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
     }
+
+
 }

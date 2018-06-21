@@ -4,10 +4,10 @@ import br.uniriotec.pm20181.modelo.ambiente.Ambiente;
 import br.uniriotec.pm20181.modelo.plano.Acao;
 import br.uniriotec.pm20181.servico.ServicoMotores;
 import br.uniriotec.pm20181.util.AreaUtil;
-import br.uniriotec.pm20181.util.XmlUtils;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import org.w3c.dom.Element;
 
 import java.util.*;
 
@@ -191,11 +191,10 @@ public abstract class Componente {
     }
 
     /**
-     * Criar instancia do Componente vindo de um arquivo XML
+     * Parametriza a instância do Componente via documento XML
      *
-     * @param xmlUtils
-     * @param servicoMotores
-     * @return
+     * @param xmlElement elemento do XML com o componente
+     * @return o componente parametrizado
      */
-    abstract boolean fromXml(XmlUtils xmlUtils, ServicoMotores servicoMotores);
+    abstract public boolean fromXml(Element xmlElement);
 }
