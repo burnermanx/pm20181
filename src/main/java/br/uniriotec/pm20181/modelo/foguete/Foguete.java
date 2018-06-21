@@ -9,6 +9,7 @@ public class Foguete {
     @Getter @Setter private Paraquedas paraquedas;
 
     public double getMassa() {
-        return paraquedas.getMassa() + controle.getMassa();
+        double massaPqd = paraquedas != null ? paraquedas.getMassa() : 0.0;
+        return controle.getMassa() + massaPqd;
     }
 }
