@@ -33,6 +33,11 @@ public class Motor extends Componente {
     }
 
     @Override
+    void acaoDisparo() {
+
+    }
+
+    @Override
     boolean fromXml(XmlUtils xmlUtils, ServicoMotores servicoMotores) {
         return false;
     }

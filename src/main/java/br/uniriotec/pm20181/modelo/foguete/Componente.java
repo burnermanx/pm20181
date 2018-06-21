@@ -15,16 +15,28 @@ import java.util.*;
  * Classe abstrata referente a um componente que constitui um foguete
  */
 public abstract class Componente {
-    @Getter @Setter private String tipo;
-    @Getter @Setter private String nome;
-    @Getter @Setter private Double peso;
-    @Getter @Setter private Double diametro;
-    @Getter @Setter private Boolean ativado;
-    @Getter private final Map<Direcao, Componente> componentes = new HashMap<>();
+    @Getter
+    @Setter
+    private String tipo;
+    @Getter
+    @Setter
+    private String nome;
+    @Getter
+    @Setter
+    private Double peso;
+    @Getter
+    @Setter
+    private Double diametro;
+    @Getter
+    @Setter
+    private Boolean ativado;
+    @Getter
+    private final Map<Direcao, Componente> componentes = new HashMap<>();
 
 
     /**
      * O cosntrutor rece o tipo do componente
+     *
      * @param tipo tipo do componente
      */
     Componente(String tipo) {
@@ -34,7 +46,8 @@ public abstract class Componente {
 
     /**
      * Anexa um componente ao próprio na direção especificada
-     * @param direcao direção onde o componente será encaixado
+     *
+     * @param direcao    direção onde o componente será encaixado
      * @param componente objeto Componente a ser encaixado
      */
     void adicionaComponenteConectado(Direcao direcao, Componente componente) {
@@ -44,6 +57,7 @@ public abstract class Componente {
 
     /**
      * Busca um componente dada a sua direção
+     *
      * @param direcao direcao de onde o Componente tem de ser pego
      * @return retorna um objeto Componente ou nulo se o componente não for encontrado
      */
@@ -54,8 +68,9 @@ public abstract class Componente {
 
     /**
      * Busca um componente dado seu nome
+     *
      * @param nome nome do componente
-     * @return  retorna um objeto Componente ou nulo se o componente não for encontrado
+     * @return retorna um objeto Componente ou nulo se o componente não for encontrado
      */
     Componente pegaComponenteNome(@NonNull String nome) {
         //Se o nome do componente sendo pesquisado já for do próprio, retorne
@@ -92,6 +107,7 @@ public abstract class Componente {
 
     /**
      * Calcular a área do foguete vista por cima, dado o componente.
+     *
      * @return a maior área possível do foguete visto por cima
      */
     Double getArea() {
@@ -128,19 +144,58 @@ public abstract class Componente {
 
     protected abstract Componente clone();
 
+    /**
+     * Método responsável para execução de ações
+     *
+     * @param acao Objeto Acao referente a ação a ser executada
+     */
     protected void processaComando(Acao acao) {
-        if (acao.getTipo().contentEquals("desconexao")) {
-            removeComponente();
+        if (acao.getTipo() == Acao.Tipo.DESCONEXAO) {
+            removeComponente(acao.getNome());
+        }
+
+        if (acao.getTipo() == Acao.Tipo.DISPARO) {
+            acaoDisparo();
         }
     }
 
-    private void removeComponente() {
+    /**
+     * Método responsável por remover um componente, caso seja encontrado
+     *
+     * @param nome nome do componente
+     */
+    private void removeComponente(@NonNull String nome) {
+        for (Direcao direcao : getComponentes().keySet()) {
+            Componente componente = pegaComponenteConectado(direcao);
 
+            if (componente.getNome().contentEquals(nome)) {
+                getComponentes().remove(direcao);
+                break;
+            } else {
+                componente.removeComponente(nome);
+            }
+        }
     }
 
+    abstract void acaoDisparo();
+
+    /**
+     * Adiciona forças de acordo com o ambiente
+     *
+     * @param ambiente       ambiente
+     * @param foguete        foguete
+     * @param intervaloTempo intervalo de tempo
+     */
     void adicionaForcas(Ambiente ambiente, Foguete foguete, int intervaloTempo) {
 
     }
 
+    /**
+     * Criar instancia do Componente vindo de um arquivo XML
+     *
+     * @param xmlUtils
+     * @param servicoMotores
+     * @return
+     */
     abstract boolean fromXml(XmlUtils xmlUtils, ServicoMotores servicoMotores);
 }

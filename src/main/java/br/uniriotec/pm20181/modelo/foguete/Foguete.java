@@ -12,4 +12,8 @@ public class Foguete {
         double massaPqd = paraquedas != null ? paraquedas.getMassa() : 0.0;
         return controle.getMassa() + massaPqd;
     }
+
+    public double getArea() {
+        return controle.getArea();
+    }
 }
