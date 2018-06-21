@@ -1,4 +1,12 @@
 package br.uniriotec.pm20181.modelo.ambiente;
 
-public class Ambiente {
+import lombok.Getter;
+
+public abstract class Ambiente {
+    public Ambiente(double gravidade) {
+        this.gravidade = gravidade;
+    }
+
+    @Getter
+    protected double gravidade;
 }

@@ -1,9 +1,7 @@
 package br.uniriotec.pm20181.modelo.ambiente;
 
-
-
 public class FabricaAmbientes {
-    public static FabricaAmbientes instance;
+    private static FabricaAmbientes instance;
 
     public static FabricaAmbientes getInstance() {
         if (instance == null) {
@@ -14,14 +12,14 @@ public class FabricaAmbientes {
     }
 
     public Ambiente getTerra() {
-        return new Ambiente();
+        return new Terra();
     }
 
     public Ambiente getLua() {
-        return new Ambiente();
+        return new Lua();
     }
 
     public Ambiente getMarte() {
-        return new Ambiente();
+        return new Marte();
     }
 }
