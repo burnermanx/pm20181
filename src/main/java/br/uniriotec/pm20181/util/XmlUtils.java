@@ -1,11 +1,18 @@
 package br.uniriotec.pm20181.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.istack.internal.Nullable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
  * Classe de apoio para carga de arquivos em formato XML
@@ -14,6 +21,32 @@ import org.w3c.dom.Node;
  */
 public class XmlUtils
 {
+    /**
+     * Retorna um objeto Document para um string de xml passado
+     */
+    @Nullable
+    public static Element getRootElementFromXmlFile(String fileLocation) {
+        ClassLoader classLoader = XmlUtils.class.getClassLoader();
+        URL resource = classLoader.getResource(fileLocation);
+
+        if (resource != null) {
+            File file = new File(resource.getFile());
+
+            try {
+                FileInputStream fis = new FileInputStream(file);
+                DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                Document document = builder.parse(fis);
+                document.getDocumentElement().normalize();
+
+                return document.getDocumentElement();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
+    }
+
     /**
      * Retorna um no filho unico de uma tag
      */
