@@ -1,7 +1,7 @@
 package br.uniriotec.pm20181.modelo.ambiente;
 
-public class Lua extends Ambiente {
-    public Lua() {
+class Lua extends Ambiente {
+    Lua() {
         super(1.62);
     }
 }
