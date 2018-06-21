@@ -32,6 +32,12 @@ public class ServicoMotoresThrustCurve implements ServicoMotores {
                 .build();
     }
 
+    /**
+     * Metodo para pegar os dados adicionais do foguete no ThrustCurve
+     * @param fabricante
+     * @param modelo
+     * @return instancia de Motor com os dados, ou nulo caso o motor não tenha sido encontrado
+     */
     @Override
     public Motor pegaMotor(String fabricante, String modelo) {
         SearchRequest searchRequest = new SearchRequest.Builder()
@@ -70,6 +76,11 @@ public class ServicoMotoresThrustCurve implements ServicoMotores {
         return null;
     }
 
+    /**
+     * Método responsável por pegar os dados de impulso do motor do ThrustCurve
+     * @param motor motor a receber os dados
+     * @return true se a operação foi efetuada com sucesso.
+     */
     @Override
     public boolean carregaImpulso(Motor motor) {
         try {
@@ -112,6 +123,9 @@ public class ServicoMotoresThrustCurve implements ServicoMotores {
         return false;
     }
 
+    /**
+     * Criador de objeto de Request para o OkHttp
+     */
     private Request createRequest(String url, String body) {
         RequestBody requestBody = RequestBody.create(MediaType.parse(MEDIA_XML), body);
 
