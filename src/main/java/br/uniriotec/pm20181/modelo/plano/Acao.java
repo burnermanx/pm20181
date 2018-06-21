@@ -1,7 +1,16 @@
 package br.uniriotec.pm20181.modelo.plano;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Acao {
-    private String tipo;
-    private Double tempo;
-    private String nome;
+    @Getter @Setter private String tipo;
+    @Getter @Setter private Double tempo;
+    @Getter @Setter private String nome;
+
+    public Acao(String tipo, Double tempo, String nome) {
+        this.tipo = tipo;
+        this.tempo = tempo;
+        this.nome = nome;
+    }
 }

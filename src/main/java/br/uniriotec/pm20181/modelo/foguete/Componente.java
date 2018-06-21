@@ -136,7 +136,13 @@ public abstract class Componente {
 
     protected abstract Componente clone();
 
-    void processaComando(Acao acao) {
+    protected void processaComando(Acao acao) {
+        if (acao.getTipo().contentEquals("desconexao")) {
+            removeComponente();
+        }
+    }
+
+    private void removeComponente() {
 
     }
 
