@@ -6,6 +6,9 @@ import org.simpleframework.xml.core.Persister;
 
 import java.io.ByteArrayOutputStream;
 
+/**
+ * Classe que representa um request de download no ThrustCurve
+ */
 @Root(name = "download-request")
 public class DownloadRequest extends AbstractRequest {
     private DownloadRequest(){}

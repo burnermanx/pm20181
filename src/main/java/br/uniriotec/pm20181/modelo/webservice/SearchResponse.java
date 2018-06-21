@@ -6,6 +6,9 @@ import org.simpleframework.xml.core.Persister;
 
 import java.util.List;
 
+/**
+ * Classe que representa a resposta do serviço de busca do ThrustCurve
+ */
 @Root(name = "search-response")
 @NamespaceList({
         @Namespace(reference = "http://www.thrustcurve.org/2015/SearchResponse"),

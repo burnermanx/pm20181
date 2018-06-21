@@ -4,7 +4,13 @@ import org.simpleframework.xml.core.Persister;
 
 import java.io.ByteArrayOutputStream;
 
+/**
+ * Classe abstrata para os requests
+ */
 abstract class AbstractRequest {
+    /**
+     * Serializa o objeto para XML
+     */
     public String toXml() {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         try {
