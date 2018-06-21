@@ -3,6 +3,9 @@ package br.uniriotec.pm20181.modelo.plano;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Classe que representa uma ação do plano de voo
+ */
 public class Acao {
 
     /**
