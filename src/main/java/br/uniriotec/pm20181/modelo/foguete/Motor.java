@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.w3c.dom.Element;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Motor extends Componente {
 
     public Motor() {
@@ -17,20 +20,22 @@ public class Motor extends Componente {
         fromXml(xml);
     }
 
-    private @Getter @Setter Long id;
-    private @Getter @Setter String motor;
-    private @Getter @Setter String fabricante;
-    private @Getter @Setter Double pesoTotal;
-    private @Getter @Setter Double pesoCombustivel;
-    private @Getter @Setter Double tempoImpulso;
+    @Getter @Setter private Long id;
+    @Getter @Setter private String motor;
+    @Getter @Setter private String fabricante;
+    @Getter @Setter private Double pesoTotal;
+    @Getter @Setter private Double pesoCombustivel;
+    @Getter @Setter private Double tempoImpulso;
+    @Getter final private List<Impulso> listaImpulso = new ArrayList<>();
+
 
     @Override
     Double getMassa() {
         return super.getMassa() + pesoTotal;
     }
 
-    public void adicionaImpulso(double a, double b) {
-
+    public void adicionaImpulso(double f, double m) {
+        listaImpulso.add(new Impulso(f, m));
     }
 
     @Override
@@ -57,5 +62,13 @@ public class Motor extends Componente {
         return false;
     }
 
+    static class Impulso {
+        Impulso(double f, double m) {
+            this.f = f;
+            this.m = m;
+        }
 
+        double f;
+        double m;
+    }
 }
