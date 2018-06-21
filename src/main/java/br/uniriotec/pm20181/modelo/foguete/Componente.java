@@ -50,7 +50,7 @@ public abstract class Componente {
      * @param direcao    direção onde o componente será encaixado
      * @param componente objeto Componente a ser encaixado
      */
-    void adicionaComponenteConectado(Direcao direcao, Componente componente) {
+    public void adicionaComponenteConectado(Direcao direcao, Componente componente) {
         getComponentes().put(direcao, componente);
     }
 
@@ -72,7 +72,7 @@ public abstract class Componente {
      * @param nome nome do componente
      * @return retorna um objeto Componente ou nulo se o componente não for encontrado
      */
-    Componente pegaComponenteNome(@NonNull String nome) {
+    public Componente pegaComponenteNome(@NonNull String nome) {
         //Se o nome do componente sendo pesquisado já for do próprio, retorne
         if (nome.contentEquals(this.getNome())) {
             return this;
