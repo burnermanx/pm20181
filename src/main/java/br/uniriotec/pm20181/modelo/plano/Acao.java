@@ -14,3 +14,5 @@ public class Acao {
         this.nome = nome;
     }
 }
+//externalizar o calculo de area do foguete
+//

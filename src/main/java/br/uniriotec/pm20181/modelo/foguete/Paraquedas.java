@@ -23,3 +23,4 @@ public class Paraquedas extends Componente {
         return false;
     }
 }
+//falta a leitura do foguete pelo xml
